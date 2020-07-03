@@ -10,8 +10,7 @@ import Foundation
 
 func readlines(_ pathname: String) -> [String] {
     let contents = try! String(contentsOfFile: pathname)
-    let lines = contents.components(separatedBy: "\n").filter { $0.count > 2 }
-    return lines
+    return split(contents)
 }
 
 func triple(from: String, at: Int) -> String {
@@ -19,8 +18,13 @@ func triple(from: String, at: Int) -> String {
 }
 
 func triples(from: String) -> [String] {
-    let subrange = 0..<(from.count-2)
-    return subrange.map { triple(from: from, at: $0) }
+    let len = from.count
+    if (len<=3) {
+        return [from]
+    } else {
+        let subrange = 0..<(from.count-2)
+        return subrange.map { triple(from: from, at: $0) }
+    }
 }
 
 func starts(_ trips: [[String]]) -> [String] {
@@ -69,11 +73,15 @@ func extend_name(_ start:String, _ parts: [String], _ ends: [String]) -> String 
 
 if (CommandLine.arguments.count < 3) {
     print("""
+
     swiftnamer COUNT PATHNAME
 
     Returns a list of COUNT names, generated from the examples in the file PATHNAME.
+
     COUNT must be a positive integer.
-    PATHNAME must name a text file containing one sample name per line.
+
+    PATHNAME must be the path of a text file containing one sample name per line.
+
     """)
     exit(1)
 } else {
