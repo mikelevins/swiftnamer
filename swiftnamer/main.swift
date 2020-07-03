@@ -8,38 +8,10 @@
 
 import Foundation
 
-extension String {
-
-    var length: Int {
-        return count
-    }
-
-    subscript (i: Int) -> String {
-        return self[i ..< i + 1]
-    }
-
-    func substring(fromIndex: Int) -> String {
-        return self[min(fromIndex, length) ..< length]
-    }
-
-    func substring(toIndex: Int) -> String {
-        return self[0 ..< max(0, toIndex)]
-    }
-
-    subscript (r: Range<Int>) -> String {
-        let range = Range(uncheckedBounds: (lower: max(0, min(length, r.lowerBound)),
-                                            upper: min(length, max(0, r.upperBound))))
-        let start = index(startIndex, offsetBy: range.lowerBound)
-        let end = index(start, offsetBy: range.upperBound - range.lowerBound)
-        return String(self[start ..< end])
-    }
-}
-
 func readlines(_ pathname: String) -> [String] {
     let contents = try! String(contentsOfFile: pathname)
-    let lines = contents.components(separatedBy: "\n")
-    let filtered_lines = lines.filter { $0.count > 2 }
-    return filtered_lines
+    let lines = contents.components(separatedBy: "\n").filter { $0.count > 2 }
+    return lines
 }
 
 func triple(from: String, at: Int) -> String {
@@ -47,11 +19,8 @@ func triple(from: String, at: Int) -> String {
 }
 
 func triples(from: String) -> [String] {
-    let charcount = from.count
-    let subrange = 0..<(charcount-2)
-    return subrange.map {
-        triple(from: from, at: $0)
-    }
+    let subrange = 0..<(from.count-2)
+    return subrange.map { triple(from: from, at: $0) }
 }
 
 func starts(_ trips: [[String]]) -> [String] {
@@ -62,24 +31,67 @@ func tails(_ trips: [[String]]) -> [[String]] {
     return trips.map { Array($0.dropFirst()) }
 }
 
+func parts(_ trips: [[String]]) -> [String] {
+    return Array(tails(trips).joined())
+}
+
+func ends(_ trips: [[String]]) -> [String] {
+    return trips.map { ($0.last ?? "") }
+}
+
 func joinable(left: String, right: String) -> Bool {
-    let leftcount = left.count
-    return (left[leftcount-2] == right[0]) && (left[leftcount-1] == right[1])
+    return (left[left.count-2] == right[0]) && (left[left.count-1] == right[1])
 }
 
 func join(left: String, right: String) -> String {
-    let rightlen = right.count
-    return left + right[2..<rightlen]
+    return left + right[2..<right.count]
 }
 
-let args = CommandLine.arguments
-let samples_path = args[1]
-let sample_lines = readlines(samples_path)
-let sample_triples = sample_lines.map { triples(from: $0) }
-let sample_starts = starts(sample_triples)
-let sample_tails = tails(sample_triples)
+func any_element<T>(_ elts: [T]) -> T? {
+    return elts.randomElement()
+}
 
-print("\(sample_starts.randomElement()!)")
-let bar = "Bar"
-let arney = "arney"
-print("\(join(left: bar, right: arney))")
+func extend_name(_ start:String, _ parts: [String], _ ends: [String]) -> String {
+    let candidates = parts.filter { joinable(left: start, right: $0) }
+    if let next = candidates.randomElement() {
+        // if next is an end then two thirds of the time we quit with it
+        if ((ends.contains(next)) && (Int.random(in: 1..<10) < 7)) {
+            return join(left: start, right: next)
+        } else {
+            let new_start = join(left: start, right: next)
+            return extend_name(new_start,parts, ends)
+        }
+    } else {
+        return start
+    }
+    
+}
+
+if (CommandLine.arguments.count < 3) {
+    print("""
+    swiftnamer COUNT PATHNAME
+
+    Returns a list of COUNT names, generated from the examples in the file PATHNAME.
+    COUNT must be a positive integer.
+    PATHNAME must name a text file containing one sample name per line.
+    """)
+    exit(1)
+} else {
+    let name_count = Int(CommandLine.arguments[1])!
+    let samples_path = CommandLine.arguments[2]
+    let sample_lines = readlines(samples_path)
+    let sample_triples = sample_lines.map { triples(from: $0) }
+    let sample_starts = starts(sample_triples)
+    let sample_parts = parts(sample_triples)
+    let sample_ends = ends(sample_triples)
+    
+    var names = [String]()
+    for _ in 0..<name_count {
+        let start = any_element(sample_starts) ?? ""
+        names.append(extend_name(start, sample_parts, sample_ends))
+    }
+    
+    for name in names {
+        print("\(name)")
+    }
+}
