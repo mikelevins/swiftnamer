@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		97704B5424ABEF940095FFEF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97704B5324ABEF940095FFEF /* main.swift */; };
 		97704B5D24AF65580095FFEF /* StringSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97704B5C24AF65580095FFEF /* StringSubscript.swift */; };
-		97704B5F24AFB8770095FFEF /* ListUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97704B5E24AFB8770095FFEF /* ListUtils.swift */; };
+		97704B5F24AFB8770095FFEF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97704B5E24AFB8770095FFEF /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,7 +28,8 @@
 		97704B5024ABEF940095FFEF /* swiftnamer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftnamer; sourceTree = BUILT_PRODUCTS_DIR; };
 		97704B5324ABEF940095FFEF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		97704B5C24AF65580095FFEF /* StringSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSubscript.swift; sourceTree = "<group>"; };
-		97704B5E24AFB8770095FFEF /* ListUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUtils.swift; sourceTree = "<group>"; };
+		97704B5E24AFB8770095FFEF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		97704B6024AFD8530095FFEF /* README.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +46,7 @@
 		97704B4724ABEF940095FFEF = {
 			isa = PBXGroup;
 			children = (
+				97704B6024AFD8530095FFEF /* README.txt */,
 				97704B5224ABEF940095FFEF /* swiftnamer */,
 				97704B5124ABEF940095FFEF /* Products */,
 			);
@@ -63,7 +65,7 @@
 			children = (
 				97704B5324ABEF940095FFEF /* main.swift */,
 				97704B5C24AF65580095FFEF /* StringSubscript.swift */,
-				97704B5E24AFB8770095FFEF /* ListUtils.swift */,
+				97704B5E24AFB8770095FFEF /* Utils.swift */,
 			);
 			path = swiftnamer;
 			sourceTree = "<group>";
@@ -128,7 +130,7 @@
 			files = (
 				97704B5D24AF65580095FFEF /* StringSubscript.swift in Sources */,
 				97704B5424ABEF940095FFEF /* main.swift in Sources */,
-				97704B5F24AFB8770095FFEF /* ListUtils.swift in Sources */,
+				97704B5F24AFB8770095FFEF /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

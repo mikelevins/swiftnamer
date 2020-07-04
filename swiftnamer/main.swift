@@ -13,46 +13,12 @@ func readlines(_ pathname: String) -> [String] {
     return split(contents)
 }
 
-func triple(from: String, at: Int) -> String {
-    return from[at..<(at+3 )]
-}
-
-func triples(from: String) -> [String] {
-    let len = from.count
-    if (len<=3) {
-        return [from]
-    } else {
-        let subrange = 0..<(from.count-2)
-        return subrange.map { triple(from: from, at: $0) }
-    }
-}
-
-func starts(_ trips: [[String]]) -> [String] {
-    return trips.map { $0[0] }
-}
-
-func tails(_ trips: [[String]]) -> [[String]] {
-    return trips.map { Array($0.dropFirst()) }
-}
-
-func parts(_ trips: [[String]]) -> [String] {
-    return Array(tails(trips).joined())
-}
-
-func ends(_ trips: [[String]]) -> [String] {
-    return trips.map { ($0.last ?? "") }
-}
-
 func joinable(left: String, right: String) -> Bool {
     return (left[left.count-2] == right[0]) && (left[left.count-1] == right[1])
 }
 
 func join(left: String, right: String) -> String {
     return left + right[2..<right.count]
-}
-
-func any_element<T>(_ elts: [T]) -> T? {
-    return elts.randomElement()
 }
 
 func extend_name(_ start:String, _ parts: [String], _ ends: [String]) -> String {
@@ -73,8 +39,10 @@ func extend_name(_ start:String, _ parts: [String], _ ends: [String]) -> String 
 
 if (CommandLine.arguments.count < 3) {
     print("""
+    swiftnamer v0.2
 
-    swiftnamer COUNT PATHNAME
+    USAGE:
+      swiftnamer COUNT PATHNAME
 
     Returns a list of COUNT names, generated from the examples in the file PATHNAME.
 
@@ -83,15 +51,17 @@ if (CommandLine.arguments.count < 3) {
     PATHNAME must be the path of a text file containing one sample name per line.
 
     """)
+    
     exit(1)
+
 } else {
     let name_count = Int(CommandLine.arguments[1])!
     let samples_path = CommandLine.arguments[2]
     let sample_lines = readlines(samples_path)
     let sample_triples = sample_lines.map { triples(from: $0) }
-    let sample_starts = starts(sample_triples)
-    let sample_parts = parts(sample_triples)
-    let sample_ends = ends(sample_triples)
+    let sample_starts = sample_triples.map { head($0) }
+    let sample_parts = flatten(tails(sample_triples))
+    let sample_ends = sample_triples.map { end($0) ?? "" }
     
     var names = [String]()
     for _ in 0..<name_count {
