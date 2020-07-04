@@ -10,6 +10,7 @@
 		97704B5424ABEF940095FFEF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97704B5324ABEF940095FFEF /* main.swift */; };
 		97704B5D24AF65580095FFEF /* StringSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97704B5C24AF65580095FFEF /* StringSubscript.swift */; };
 		97704B5F24AFB8770095FFEF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97704B5E24AFB8770095FFEF /* Utils.swift */; };
+		97704B6224B0AD150095FFEF /* ArrayWithoutDuplicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97704B6124B0AD150095FFEF /* ArrayWithoutDuplicates.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +31,7 @@
 		97704B5C24AF65580095FFEF /* StringSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSubscript.swift; sourceTree = "<group>"; };
 		97704B5E24AFB8770095FFEF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		97704B6024AFD8530095FFEF /* README.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		97704B6124B0AD150095FFEF /* ArrayWithoutDuplicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayWithoutDuplicates.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				97704B5324ABEF940095FFEF /* main.swift */,
 				97704B5C24AF65580095FFEF /* StringSubscript.swift */,
 				97704B5E24AFB8770095FFEF /* Utils.swift */,
+				97704B6124B0AD150095FFEF /* ArrayWithoutDuplicates.swift */,
 			);
 			path = swiftnamer;
 			sourceTree = "<group>";
@@ -128,6 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97704B6224B0AD150095FFEF /* ArrayWithoutDuplicates.swift in Sources */,
 				97704B5D24AF65580095FFEF /* StringSubscript.swift in Sources */,
 				97704B5424ABEF940095FFEF /* main.swift in Sources */,
 				97704B5F24AFB8770095FFEF /* Utils.swift in Sources */,

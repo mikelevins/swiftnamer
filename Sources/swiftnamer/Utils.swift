@@ -50,3 +50,12 @@ func flatten<T> (_ seq: [[T]]) -> [T] {
 func any_element<T>(_ elts: [T]) -> T? {
     return elts.randomElement()
 }
+
+func joinableWith(_ left: String) -> ((String) -> Bool) {
+    return { right in return (left[left.count-2] == right[0]) && (left[left.count-1] == right[1]) }
+}
+
+func join(left: String, right: String) -> String {
+    return left + right[2..<right.count]
+}
+
